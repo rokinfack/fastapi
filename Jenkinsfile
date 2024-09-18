@@ -12,6 +12,8 @@ pipeline {
                    // sh 'docker network create jenkins || true'
                     
                     // Start Docker Compose in detached mode with the custom network
+                    sh 'docker compose down'
+                    sh 'docker compose ps'
                     sh 'docker compose up -d'
                     sh 'docker network create jenkins'
 
