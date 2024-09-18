@@ -49,7 +49,7 @@ pipeline {
                     
                     // Run Newman with the collection
                     sh 'newman -v'
-                    sh 'newman Collection1.postman_collection.json -e jenkins.postman_environment.json'
+                    sh 'newman run Collection1.postman_collection.json -e jenkins.postman_environment.json'
                 }
             }
         }
