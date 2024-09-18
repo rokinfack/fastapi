@@ -29,7 +29,7 @@ pipeline {
                     """
 
                     // List running containers
-                    sh 'docker ps '
+                    sh 'docker ps'
                 }
             }
         }
