@@ -13,6 +13,8 @@ pipeline {
                     
                     // Start Docker Compose in detached mode with the custom network
                     sh 'docker ps'
+                    sh 'docker stop ed856f6119cb'
+                    sh 'docker remove ed856f6119cb'
                     sh 'docker network create jenkins'
                        sh 'docker compose up -d'
 
