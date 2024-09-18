@@ -15,7 +15,6 @@ pipeline {
                     sh 'docker ps'
                     sh 'docker stop ed856f6119cb'
                     sh 'docker remove ed856f6119cb'
-                    sh 'docker network create jenkins'
                        sh 'docker compose up -d'
 
                     // Wait for the FastAPI service to be up
