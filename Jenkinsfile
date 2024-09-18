@@ -13,7 +13,6 @@ pipeline {
                     
                     // Start Docker Compose in detached mode with the custom network
                 
-                    sh 'docker network create jenkins'
                        sh 'docker compose up -d'
 
                     // Wait for the FastAPI service to be up
