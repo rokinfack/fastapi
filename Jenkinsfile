@@ -57,14 +57,39 @@ pipeline {
         
          stage("build parallel"){
              parallel{
-            stage("parallel"){
-                sh 'mvn run test'
+              steps {
+                script {
+                    // Clone the Newman collection repository
+                    git branch: 'main', url: 'https://github.com/rokinfack/newman-test'
+                    
+                    // Run Newman with the collection
+                    sh 'newman -v'
+                    sh 'newman run Collection1.postman_collection.json -e environment.json'
+                }
             }
              stage("parallel"){
-                sh 'npx cypress run'
+                 steps {
+                script {
+                    // Clone the Newman collection repository
+                    git branch: 'main', url: 'https://github.com/rokinfack/newman-test'
+                    
+                    // Run Newman with the collection
+                    sh 'newman -v'
+                    sh 'newman run Collection1.postman_collection.json -e environment.json'
+                }
+            }
             }
              stage("parallel"){
-                sh 'npx playwright test'
+                  steps {
+                script {
+                    // Clone the Newman collection repository
+                    git branch: 'main', url: 'https://github.com/rokinfack/newman-test'
+                    
+                    // Run Newman with the collection
+                    sh 'newman -v'
+                    sh 'newman run Collection1.postman_collection.json -e environment.json'
+                }
+            }
             }
         }
     }
