@@ -32,9 +32,7 @@ pipeline {
                     sh 'docker ps'
                 }
             }
-        }
-
-        parallel{
+             parallel{
             stage("parallel"){
                 sh 'mvn run test'
             }
@@ -53,6 +51,9 @@ pipeline {
                     args "--network=jenkins --entrypoint=''"
                 }
             }
+        }
+
+       
 
             steps {
                 script {
