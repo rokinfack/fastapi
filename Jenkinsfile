@@ -34,6 +34,18 @@ pipeline {
             }
         }
 
+        parallel{
+            stage("parallel"){
+                sh 'mvn run test'
+            }
+             stage("parallel"){
+                sh 'npx cypress run'
+            }
+             stage("parallel"){
+                sh 'npx playwright test'
+            }
+        }
+
         stage('Stage 2: Get Newman Image') {
             agent {
                 docker { 
