@@ -32,19 +32,8 @@ pipeline {
                     sh 'docker ps'
                 }
             }
-             stage("build parallel"){
-            parallel{
-            stage("parallel"){
-                sh 'mvn run test'
-            }
-             stage("parallel"){
-                sh 'npx cypress run'
-            }
-             stage("parallel"){
-                sh 'npx playwright test'
-            }
-             }
         }
+        
 
         stage('Stage 2: Get Newman Image') {
             agent {
@@ -53,9 +42,6 @@ pipeline {
                     args "--network=jenkins --entrypoint=''"
                 }
             }
-        }
-
-       
 
             steps {
                 script {
@@ -65,6 +51,28 @@ pipeline {
                     // Run Newman with the collection
                     sh 'newman -v'
                     sh 'newman run Collection1.postman_collection.json -e environment.json'
+                }
+            }
+        }
+
+        stage("build parallel"){
+             parallel{
+            stage("parallel"){
+                sh 'mvn run test'
+            }
+             stage("parallel"){
+                sh 'npx cypress run'
+            }
+             stage("parallel"){
+                sh 'npx playwright test'
+            }
+        }
+
+        stage('Stage 2: Get Newman Image') {
+            agent {
+                docker { 
+                    image 'postman/newman'
+                    args "--network=jenkins --entrypoint=''"
                 }
             }
         }
