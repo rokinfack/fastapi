@@ -54,8 +54,8 @@ pipeline {
                 }
             }
         }
-
-        stage("build parallel"){
+        
+         stage("build parallel"){
              parallel{
             stage("parallel"){
                 sh 'mvn run test'
@@ -67,15 +67,7 @@ pipeline {
                 sh 'npx playwright test'
             }
         }
-
-        stage('Stage 2: Get Newman Image') {
-            agent {
-                docker { 
-                    image 'postman/newman'
-                    args "--network=jenkins --entrypoint=''"
-                }
-            }
-        }
+    }
     }
 
     post {
