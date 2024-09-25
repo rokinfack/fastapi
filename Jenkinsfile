@@ -33,7 +33,70 @@ pipeline {
                     sh 'docker ps'
                 }
             }
+        
         }
+
+          stage('Stage 2: Get Newman Image'){
+                steps {
+       parallel(
+      cript {
+                    // Clone the repository
+                    git branch: 'main', url: 'https://github.com/hocinilotfi/fastapi-jenkins'
+                    
+                    // Create a custom Docker network (if it doesn't exist)
+                   sh 'docker network create jenkins || true'
+                    
+                    // Start Docker Compose in detached mode with the custom network
+                    sh 'docker ps'
+                       sh 'docker compose up -d'
+
+                    // Wait for the FastAPI service to be up
+                    sh """
+                    for i in {1..10}; do
+                        if curl --silent --fail http://localhost:8988; then
+                            echo 'FastAPI service is up and running.'
+                            break
+                        else
+                            echo "FastAPI service is not available yet. Retrying in 5 seconds..."
+                            sleep 5
+                        fi
+                    done
+                    """
+
+                    // List running containers
+                    sh 'docker ps'
+                }
+     cript {
+                    // Clone the repository
+                    git branch: 'main', url: 'https://github.com/hocinilotfi/fastapi-jenkins'
+                    
+                    // Create a custom Docker network (if it doesn't exist)
+                   sh 'docker network create jenkins || true'
+                    
+                    // Start Docker Compose in detached mode with the custom network
+                    sh 'docker ps'
+                       sh 'docker compose up -d'
+
+                    // Wait for the FastAPI service to be up
+                    sh """
+                    for i in {1..10}; do
+                        if curl --silent --fail http://localhost:8988; then
+                            echo 'FastAPI service is up and running.'
+                            break
+                        else
+                            echo "FastAPI service is not available yet. Retrying in 5 seconds..."
+                            sleep 5
+                        fi
+                    done
+                    """
+
+                    // List running containers
+                    sh 'docker ps'
+                }
+    )
+  }
+          }
+        
         
 
         stage('Stage 2: Get Newman Image') {
