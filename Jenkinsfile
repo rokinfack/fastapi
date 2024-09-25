@@ -5,7 +5,7 @@ pipeline {
         stage('Stage 1: Start FastAPI Service') {
             steps {
                  echo "Building on branch ${env.BRANCH_NAME}"
-              parallel{
+              parallel( 
                   script {
                     // Clone the repository
                     git branch: 'main', url: 'https://github.com/hocinilotfi/fastapi-jenkins'
@@ -60,7 +60,7 @@ pipeline {
                     // List running containers
                     sh 'docker ps'
                 }
-              }
+              )
             }
         }
         
