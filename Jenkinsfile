@@ -32,7 +32,8 @@ pipeline {
                     sh 'docker ps'
                 }
             }
-             parallel{
+             stage("build parallel"){
+            parallel{
             stage("parallel"){
                 sh 'mvn run test'
             }
@@ -42,6 +43,7 @@ pipeline {
              stage("parallel"){
                 sh 'npx playwright test'
             }
+             }
         }
 
         stage('Stage 2: Get Newman Image') {
