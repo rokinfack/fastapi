@@ -4,6 +4,7 @@ pipeline {
     stages {
         stage('Stage 1: Start FastAPI Service') {
             steps {
+                 echo "Building on branch ${env.BRANCH_NAME}"
                 script {
                     // Clone the repository
                     git branch: 'main', url: 'https://github.com/hocinilotfi/fastapi-jenkins'
@@ -55,44 +56,6 @@ pipeline {
             }
         }
         
-         stage("build parallel"){
-             parallel{
-              steps {
-                script {
-                    // Clone the Newman collection repository
-                    git branch: 'main', url: 'https://github.com/rokinfack/newman-test'
-                    
-                    // Run Newman with the collection
-                    sh 'newman -v'
-                    sh 'newman run Collection1.postman_collection.json -e environment.json'
-                }
-            }
-             stage("parallel"){
-                 steps {
-                script {
-                    // Clone the Newman collection repository
-                    git branch: 'main', url: 'https://github.com/rokinfack/newman-test'
-                    
-                    // Run Newman with the collection
-                    sh 'newman -v'
-                    sh 'newman run Collection1.postman_collection.json -e environment.json'
-                }
-            }
-            }
-             stage("parallel"){
-                  steps {
-                script {
-                    // Clone the Newman collection repository
-                    git branch: 'main', url: 'https://github.com/rokinfack/newman-test'
-                    
-                    // Run Newman with the collection
-                    sh 'newman -v'
-                    sh 'newman run Collection1.postman_collection.json -e environment.json'
-                }
-            }
-            }
-        }
-    }
     }
 
     post {
