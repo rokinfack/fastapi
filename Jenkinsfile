@@ -10,7 +10,7 @@ pipeline {
                     git branch: 'main', url: 'https://github.com/hocinilotfi/fastapi-jenkins'
                     
                     // Create a custom Docker network (if it doesn't exist)
-                   // sh 'docker network create jenkins || true'
+                   sh 'docker network create jenkins || true'
                     
                     // Start Docker Compose in detached mode with the custom network
                     sh 'docker ps'
