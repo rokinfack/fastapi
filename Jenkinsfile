@@ -39,7 +39,8 @@ pipeline {
           stage('Stage 2: Get Newman Image'){
                 steps {
        parallel(
-      script {
+       steps{
+        script {
                     // Clone the repository
                     git branch: 'main', url: 'https://github.com/hocinilotfi/fastapi-jenkins'
                     
@@ -66,7 +67,9 @@ pipeline {
                     // List running containers
                     sh 'docker ps'
                 }
-     script {
+       }
+    steps{
+         script {
                     // Clone the repository
                     git branch: 'main', url: 'https://github.com/hocinilotfi/fastapi-jenkins'
                     
@@ -93,6 +96,7 @@ pipeline {
                     // List running containers
                     sh 'docker ps'
                 }
+    }
     )
   }
           }
